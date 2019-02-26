@@ -12,8 +12,15 @@ def find_proteins():
     # User will input what protein they are looking for.
     limit_results = int(input("how many proteins do you want? "))
     # User will input how many proteins they are looking for.
-    found_proteins = []
-    count = 0
+    find_synonym = input("Do you wish to find proteins with secondary relation to your search? (y/n) ")
+    # this input command will determine if the function will find only the proteins by their primary annotation or
+    # secondary annotation as well
+    if find_synonym == "y" or "yes":
+        flag = True
+    elif find_synonym == "n" or "no":
+        flag = False
+    found_proteins = []  # creates an empty list to store contained proteins
+    count = 0  # variable to count how many entries have been found
     x = False
     with gzip.open("uniprot_sprot.xml.gz") as f:
         for entry in SeqIO.parse(f, "uniprot-xml"):
@@ -24,7 +31,7 @@ def find_proteins():
                 value = entry.annotations["gene_name_primary"].lower()
                 found = desired_protein in value
                 print("id:{}, Primary: {}".format(entry.id, value)) if found else ""
-            if not found and "gene_name_synonym" in entry.annotations.keys():
+            if not found and "gene_name_synonym" in entry.annotations.keys() and flag is True:
                 values = [x.lower() for x in entry.annotations["gene_name_synonym"]]
                 for value in values:
                     if desired_protein in value:
