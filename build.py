@@ -1,6 +1,5 @@
 # imports
 from Bio import SeqIO
-from Bio.Seq import Seq
 import random
 
 
@@ -124,6 +123,11 @@ unchangeable_codon_table = {
     "Trp": ["TGG"]
 }
 
+input_sequence = SeqIO.index(input("Please input which sequence you want to use."), "fasta")
+print(input_sequence)
+sequence = 0
+for keys, values in input_sequence.items():
+    sequence = values.seq
 # this is an empty list that will contain restriction sites that need to be changed.
 restriction_sites = []
 changed_restriction_sites = {}
@@ -150,5 +154,6 @@ while flag is True:
 
 
 print("Your chosen restriction sites are " + str(restriction_sites))
-print("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC")
-print(remove_restriction_sites("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC"))
+# print("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC")
+# print(remove_restriction_sites("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC"))
+print(remove_restriction_sites(str(sequence)))
