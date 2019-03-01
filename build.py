@@ -1,6 +1,7 @@
 # imports
 from Bio import SeqIO
 from Bio.Seq import Seq
+import random
 
 
 # functions
@@ -48,18 +49,12 @@ def replace_codon(frame, input_restriction_site):
     for i in range(frame, len(input_restriction_site), 3):
         checked_codon = input_restriction_site[i:i+3]
         replaced_codon = input_restriction_site[i:i+3]
-        if checked_codon == "TTT":
-            replaced_codon = "TTC"
-        if checked_codon == "TTC":
-            replaced_codon = "TTT"
-        if checked_codon == "ATT":
-            replaced_codon = "ATC"
-        if checked_codon == "ATC":
-            replaced_codon = "ATT"
-        if checked_codon == "AAT":
-            replaced_codon = "AAC"
-        if checked_codon == "AAC":
-            replaced_codon = "AAT"
+        for aa in codon_table.values():
+            for codon in aa:
+                if checked_codon == codon:
+                    aa.remove(checked_codon)
+                    replaced_codon = random.choice(aa)
+                    aa.append(checked_codon)
         if input_restriction_site[i:i+3] != replaced_codon:
             input_restriction_site = input_restriction_site.replace(checked_codon, replaced_codon)
     return input_restriction_site
@@ -100,6 +95,35 @@ def remove_restriction_sites(input_DNA):
 
 
 # main
+# This dictionary contains all of the codons for amino acids which have more than one codon. These are fed into the
+#
+codon_table = {
+    "Phe": ["TTC", "TTT"],
+    "Leu": ["TTA", "TTG", "CTT", "CTC", "CTA", "CTG"],
+    "Ile": ["ATT", "ATC", "ATA"],
+    "Val": ["GTT", "GTC", "GTA", "GTG"],
+    "Ser": ["TCT", "TCC", "TCA", "TCG", "AGT", "AGC"],
+    "Pro": ["CCT", "CCC", "CCA", "CCG"],
+    "Thr": ["ACT", "ACC", "ACA", "ACG"],
+    "Ala": ["GCT", "GCC", "GCA", "GCG"],
+    "Tyr": ["TAT", "TAC"],
+    "His": ["CAT", "CAC"],
+    "Gln": ["CAA", "CAG"],
+    "Asn": ["AAT", "AAC"],
+    "Lys": ["AAA", "AAG"],
+    "Asp": ["GAT", "GAC"],
+    "Glu": ["GAA", "GAG"],
+    "Cys": ["TGT", "TGC"],
+    "Arg": ["CGT", "CGC", "CGA", "CGG", "AGA", "AGG"],
+    "Gly": ["GGT", "GGC", "GGA", "GGG"]
+}
+# This dictionary contains codons for amino acids with just one codon. These codons cannot be changed in  protein coding
+# sequences so the replace_codon function will have to choose another.
+unchangeable_codon_table = {
+    "Met": ["ATG"],
+    "Trp": ["TGG"]
+}
+
 # this is an empty list that will contain restriction sites that need to be changed.
 restriction_sites = []
 changed_restriction_sites = {}
@@ -123,6 +147,7 @@ while flag is True:
     else:
         print("Sorry your input did not work please try again.")
         pass
+
 
 print("Your chosen restriction sites are " + str(restriction_sites))
 print("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC")
