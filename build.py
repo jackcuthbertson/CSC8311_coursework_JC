@@ -18,6 +18,40 @@ def correct_letters(seq):
     return x
 
 
+# This function asks the user what file contains their desired sequence and what file type. The function is tested with
+# fasta and genbank files
+def enter_file_name_type():
+    filename = input("What is the name of the file you wish to enter? (include file extension)\n")
+    filetype = input("Which file format do you wish to use? 1) fasta 2) genbank\n"
+                     "Enter the number or the first initial of your desired format.\n")
+    if filetype in ["1", "f", "F", "fasta", "Fasta", "FASTA"]:
+        filetype = "fasta"
+    elif filetype in ["2", "g", "G", "genbank", "Genbank", "GENBANK"]:
+        filetype = "genbank"
+    try:
+        input_sequence = SeqIO.index(filename, filetype)
+    except ValueError:
+        print("Sorry the file format you entered was incorrect please try again.")
+        input_sequence = 0
+    except FileNotFoundError:
+        print("Sorry the file you were looking for was not found.")
+        input_sequence = 0
+    if input_sequence == 0:
+        return enter_file_name_type()
+    else:
+        output = seq_to_string(input_sequence)
+        return output
+
+
+# Here an input fasta or genbank file will be converted to a string.
+def seq_to_string(input_sequence):
+    sequence = 0
+    for keys, values in input_sequence.items():
+        sequence = values.seq
+    str(sequence)
+    return sequence
+
+
 # this function will add restriction sites to be removed to a list based on user input
 def add_chosen_restriction_sites(chosen_site):
     if chosen_site in ["1", "e", "E"]:
@@ -54,9 +88,10 @@ def replace_codon(frame, input_restriction_site):
                     aa.remove(checked_codon)
                     replaced_codon = random.choice(aa)
                     aa.append(checked_codon)
+                    print(checked_codon, replaced_codon)
         if input_restriction_site[i:i+3] != replaced_codon:
             input_restriction_site = input_restriction_site.replace(checked_codon, replaced_codon)
-    return input_restriction_site
+            return input_restriction_site
 
 
 # This function will pass through a DNA sequence until it finds a restriction site. it will then call the replace_codon
@@ -123,11 +158,9 @@ unchangeable_codon_table = {
     "Trp": ["TGG"]
 }
 
-input_sequence = SeqIO.index(input("Please input which sequence you want to use."), "fasta")
-print(input_sequence)
-sequence = 0
-for keys, values in input_sequence.items():
-    sequence = values.seq
+
+sequence1 = enter_file_name_type()
+
 # this is an empty list that will contain restriction sites that need to be changed.
 restriction_sites = []
 changed_restriction_sites = {}
@@ -154,6 +187,5 @@ while flag is True:
 
 
 print("Your chosen restriction sites are " + str(restriction_sites))
-# print("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC")
-# print(remove_restriction_sites("AAAGAATTCGGGATGAGAATTCAAGGTTAGTGAATTC"))
-print(remove_restriction_sites(str(sequence)))
+
+print(remove_restriction_sites(str(sequence1)))

@@ -1,0 +1,77 @@
+LOCUS       FJ463162                1434 bp    DNA     linear   BCT 14-DEC-2009
+DEFINITION  Bacillus subtilis strain BF7658 amylase precursor (amyE) gene,
+            complete cds.
+ACCESSION   FJ463162
+VERSION     FJ463162.1
+KEYWORDS    .
+SOURCE      Bacillus subtilis
+  ORGANISM  Bacillus subtilis
+            Bacteria; Firmicutes; Bacilli; Bacillales; Bacillaceae; Bacillus.
+REFERENCE   1  (bases 1 to 1434)
+  AUTHORS   Liu,Y., Lu,F., Chen,G., Snyder,C.L., Sun,J., Li,Y., Wang,J. and
+            Xiao,J.
+  TITLE     High-level expression, purification and characterization of a
+            recombinant medium-temperature alpha-amylase from Bacillus subtilis
+  JOURNAL   Biotechnol. Lett. (2009) In press
+   PUBMED   19728109
+  REMARK    Publication Status: Available-Online prior to print
+REFERENCE   2  (bases 1 to 1434)
+  AUTHORS   Sun,J., Liu,Y.H. and Lu,F.P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (14-NOV-2008) School of Bioengineering, Tianjin
+            University of Science and Technology, No. 29 Street 13, Tianjin
+            Economy Development Area, Tianjin 300457, China
+FEATURES             Location/Qualifiers
+     source          1..1434
+                     /organism="Bacillus subtilis"
+                     /mol_type="genomic DNA"
+                     /strain="BF7658"
+                     /db_xref="taxon:1423"
+     gene            1..1434
+                     /gene="amyE"
+     CDS             1..1434
+                     /gene="amyE"
+                     /EC_number="3.2.1.1"
+                     /note="degrades starch"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="amylase precursor"
+                     /protein_id="ACK37366.1"
+                     /translation="MFAKRFKTSLLPLFAGFLLLFHLVLAGPAAASAETANKSNELTA
+                     PSIKSGTILHAWNWSFNTLKHNMKDIHDAGYTAIQTSPINQVKEGNQGDKSMSNWYWL
+                     YHPTSYQIGNRYLGTEQEFKEMCAAAEEYGIKVIVDAVINHTTSDYAAISNEVKSIPN
+                     WTHGNTQIKNWSDRWDVTQNSLLGLYDWNTQNTQVQSYLKRFLERALNDGADGFRFDA
+                     AKHIELPDDGSYGSQFWPNITNTSAEFQYGEILQDSASRDAAYANYMDVTASNYGHSI
+                     RSALKNRNLGVSNISHYASDVSADKLVTWVESHDTYANDDEESTWMSDDDIRLGWAVI
+                     ASRSGSTPLFFSRPEGGGNGVRFPGKSQIGDRGSALFEDQAITAVNRFHNVMAGQHEE
+                     LSNPNGNNQIFMNQRGSHGVVLANAGSSSVSINTATKLPDGRYDNKAGAGSFQVNDGK
+                     LTGTINARSVAVLYPDDIEIRCNTFFQ"
+     sig_peptide     1..93
+                     /gene="amyE"
+ORIGIN      
+        1 atgtttgcaa aacgattcaa aacctcttta ctgccgttat tcgctggatt tttattgctg
+       61 tttcatttgg ttctggcagg accggcggct gcgagtgctg aaacggcgaa caaatcgaat
+      121 gagcttacag caccgtcgat caaaagcgga accattcttc atgcatggaa ttggtcgttc
+      181 aatacgttaa aacacaatat gaaggatatt catgatgcag gatatacagc cattcagaca
+      241 tctccgatta accaagtaaa ggaagggaat caaggagata aaagcatgtc gaactggtac
+      301 tggctgtatc acccgacatc gtatcaaatt ggcaaccgtt acttaggtac tgaacaagaa
+      361 tttaaagaaa tgtgtgcagc cgctgaagaa tatggcataa aggtcattgt tgacgcggtc
+      421 atcaatcata ccaccagtga ttatgccgcg atttccaatg aggttaagag tattccaaac
+      481 tggacacatg gaaacacaca aattaaaaac tggtctgatc gatgggatgt cacgcagaat
+      541 tcattgctcg ggctgtatga ctggaataca caaaatacac aagtacagtc ctatctgaaa
+      601 cggttcttag aaagggcatt gaatgacggg gcagacggtt ttcgatttga tgccgccaaa
+      661 catatagagc ttccggatga tgggagttac ggcagtcaat tttggccgaa tatcacaaat
+      721 acatctgcag agttccaata cggagaaatc ctgcaggata gtgcctccag agatgctgca
+      781 tatgcgaatt atatggatgt gacagcgtct aactatgggc attccataag gtccgcttta
+      841 aagaatcgta atctgggcgt gtcgaatatc tcccactatg catctgatgt gtctgcggac
+      901 aagctggtga catgggtgga gtcgcatgat acgtatgcca atgatgatga agagtcgaca
+      961 tggatgagcg atgatgatat ccgtttaggc tgggcggtga tagcttctcg ttcaggcagt
+     1021 acgcctcttt tcttttccag acctgaggga ggcggaaatg gtgtgagatt cccggggaaa
+     1081 agccaaatag gcgatcgcgg gagtgcttta tttgaagatc aggctatcac tgcggtcaat
+     1141 agatttcaca atgtgatggc tggacagcat gaggaactct cgaacccgaa tggaaacaac
+     1201 cagatattta tgaatcagcg cggctcacat ggcgttgtgc tggcaaatgc aggttcatcc
+     1261 tctgtctcta tcaatacggc aacaaaattg cctgatggca ggtatgacaa taaagctgga
+     1321 gcgggttcat ttcaagtgaa cgatggtaaa ctgacaggca cgatcaatgc caggtctgta
+     1381 gctgtgcttt atcctgatga tattgaaatc aggtgtaaca cattctttca atga
+//
+
