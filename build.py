@@ -1,5 +1,7 @@
 # imports
 from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 import random
 
 
@@ -88,7 +90,6 @@ def replace_codon(frame, input_restriction_site):
                     aa.remove(checked_codon)
                     replaced_codon = random.choice(aa)
                     aa.append(checked_codon)
-                    print(checked_codon, replaced_codon)
         if input_restriction_site[i:i+3] != replaced_codon:
             input_restriction_site = input_restriction_site.replace(checked_codon, replaced_codon)
             return input_restriction_site
@@ -128,6 +129,23 @@ def remove_restriction_sites(input_DNA):
     return nuc
 
 
+# With an input changed sequence string we create a new SeqRecord object which contains the new sequence, an ID, a name
+# and a description. The user will also input the name of their new fasta file.
+def create_seqrecord(sequence):
+    seq = Seq(sequence)
+    output_seq_record = SeqRecord(seq)
+    output_seq_record.id = input("Enter ID for new SeqRecord.\n")
+    name = input("What would you like to call your sequence\n"
+                 "enter 'NONE' for no name\n")
+    if name != "NONE":
+        output_seq_record.name = name
+    description = input("Enter a short description for your sequence.\n"
+                        "Enter 'NONE' for no description\n")
+    if description != "NONE":
+        output_seq_record.description = description
+    return output_seq_record
+
+
 # main
 # This dictionary contains all of the codons for amino acids which have more than one codon. These are fed into the
 #
@@ -163,7 +181,6 @@ sequence1 = enter_file_name_type()
 
 # this is an empty list that will contain restriction sites that need to be changed.
 restriction_sites = []
-changed_restriction_sites = {}
 # Here the user is presented with options that will determine which restriction sites are placed into the list
 flag = True
 first_choice = input("What restriction sites would you like to remove from your DNA sequence? \n"
@@ -188,4 +205,12 @@ while flag is True:
 
 print("Your chosen restriction sites are " + str(restriction_sites))
 
-print(remove_restriction_sites(str(sequence1)))
+sequence2 = remove_restriction_sites(str(sequence1))
+
+seq_record = create_seqrecord(sequence2)
+
+new_file_name = input("enter the name of your new fasta file here. (include file extension)\n")
+SeqIO.write(seq_record, new_file_name, "fasta")
+
+print("Sequence record written to file : {}\n".format(new_file_name))
+print(seq_record)

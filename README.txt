@@ -18,3 +18,6 @@ There are 4 restriction sites built in, EcoR1, Xba1, Spe1, Pst1.
 If you wish to look for another restriction site please type in what the recognition site is.
 The program will check to make sure the entered sequence is valid or not and will prompt you again if it is not.
 Your sequence will be checked for restriction recognition sites and if they are found they will be changed.
+You will be asked to enter the details of your new SeqRecord object (id, name, description).
+A prompt will come up to enter the filename for your new SeqRecord object.
+The SeqRecord will then be saved as a fasta file.
