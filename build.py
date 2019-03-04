@@ -49,11 +49,11 @@ def enter_file_name_type():
 
 # Here an input fasta or genbank file will be converted to a string.
 def seq_to_string(input_sequence):
+    print("this is input_sequence" + str(type(input_sequence)))
     sequence = 0
     for keys, values in input_sequence.items():
         sequence = values.seq
-    str(sequence)
-    return sequence
+    return str(sequence)
 
 
 # this function will add restriction sites to be removed to a list based on user input
@@ -150,6 +150,54 @@ def create_seqrecord(sequence):
     return output_seq_record
 
 
+def main():
+    sequence1 = enter_file_name_type()
+
+    # Here the user is presented with options that will determine which restriction sites are placed into the list.
+    flag = True
+    first_choice = input("What restriction sites would you like to remove from your DNA sequence? \n"
+                         "You can choose from 1) EcoR1, 2) Xba1, 3) Spe1 and 4) Pst1.\n"
+                         "Enter 5) or all to choose all of the above restriction sites. \n"
+                         "If you would like to choose one of these enzymes enter the corresponding "
+                         "number or first initial\n"
+                         "If you would prefer a different restriction enzyme please enter the recognition sequence.\n")
+
+    add_chosen_restriction_sites(first_choice)
+    # This conditional loop is used to continue adding restriction sites to the lists if the user is not finished.
+    while flag is True:
+        user_input = input("Would you like to add another restriction site? (Y/N)\n")
+        if user_input in ["Y", "Yes", "y", "yes"]:
+            add_chosen_restriction_sites(input("Which restriction site would you like to add?\n"
+                                               "1) EcoR1, 2) Xba1, 3) Spe1 and 4) Pst1\n"))
+        elif user_input in ["N", "No", "n", "no"]:
+            flag = False
+        else:
+            print("Sorry your input did not work please try again.")
+            pass
+
+    # This prints out the list of restriction sites that have been chosen by the user.
+    print("Your chosen restriction sites are " + str(restriction_sites))
+
+    # A new variable is created to contain the changed sequence.
+    sequence2 = remove_restriction_sites(sequence1)
+
+    # If the user wishes to add a BioBrick prefix and suffix then that will be added.
+    biobrick_question = input("Do you wish to add a BioBrick suffix and prefix to this sequence? (Y/N) \n")
+    if biobrick_question in ["y", "yes", "Y", "Yes", "YES"]:
+        sequence2 = "GAATTCGCGGCCGCTTCTAG" + sequence2 + "TACTAGTAGCGGCCGCTGCAG"
+
+    # A SeqRecord object is created which contains our edited sequence, an ID, a name and a description.
+    seq_record = create_seqrecord(sequence2)
+
+    # the SeqRecord object is then written to a file with a filename chosen by the user.
+    new_file_name = input("enter the name of your new fasta file here.\n")
+    SeqIO.write(seq_record, new_file_name, "fasta")
+
+    # The SeqRecord object and name of the new file are printed to show the user.
+    print("Sequence record written to file : {}\n".format(new_file_name))
+    print(seq_record)
+
+
 # main
 # This dictionary contains all of the codons for amino acids which have more than one codon. These are fed into the
 # replace codon function which if it finds on in one of these lists it will replace it with another.
@@ -183,49 +231,5 @@ unchangeable_codon_table = {
 # this is an empty list that will contain restriction sites that need to be changed.
 restriction_sites = []
 
-# The user will input the name and filetype of the DNA sequence they want changed.
-sequence1 = enter_file_name_type()
-
-# Here the user is presented with options that will determine which restriction sites are placed into the list.
-flag = True
-first_choice = input("What restriction sites would you like to remove from your DNA sequence? \n"
-                     "You can choose from 1) EcoR1, 2) Xba1, 3) Spe1 and 4) Pst1.\n"
-                     "Enter 5) or all to choose all of the above restriction sites. \n"
-                     "If you would like to choose one of these enzymes enter the corresponding "
-                     "number or first initial\n"
-                     "If you would prefer a different restriction enzyme please enter the recognition sequence.\n")
-
-add_chosen_restriction_sites(first_choice)
-# This conditional loop is used to continue adding restriction sites to the lists if the user is not finished.
-while flag is True:
-    user_input = input("Would you like to add another restriction site? (Y/N)\n")
-    if user_input in ["Y", "Yes", "y", "yes"]:
-        add_chosen_restriction_sites(input("Which restriction site would you like to add?\n"
-                                           "1) EcoR1, 2) Xba1, 3) Spe1 and 4) Pst1\n"))
-    elif user_input in ["N", "No", "n", "no"]:
-        flag = False
-    else:
-        print("Sorry your input did not work please try again.")
-        pass
-
-# This prints out the list of restriction sites that have been chosen by the user.
-print("Your chosen restriction sites are " + str(restriction_sites))
-
-# A new variable is created to contain the changed sequence.
-sequence2 = remove_restriction_sites(sequence1)
-
-# If the user wishes to add a BioBrick prefix and suffix then that will be added.
-biobrick_question = input("Do you wish to add a BioBrick suffix and prefix to this sequence? (Y/N) \n")
-if biobrick_question in ["y", "yes", "Y", "Yes", "YES"]:
-    sequence2 = "GAATTCGCGGCCGCTTCTAG" + sequence2 + "TACTAGTAGCGGCCGCTGCAG"
-
-# A SeqRecord object is created which contains our edited sequence, an ID, a name and a description.
-seq_record = create_seqrecord(sequence2)
-
-# the SeqRecord object is then written to a file with a filename chosen by the user.
-new_file_name = input("enter the name of your new fasta file here.\n")
-SeqIO.write(seq_record, new_file_name, "fasta")
-
-# The SeqRecord object and name of the new file are printed to show the user.
-print("Sequence record written to file : {}\n".format(new_file_name))
-print(seq_record)
+if __name__ == '__main__':
+    main()
