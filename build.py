@@ -49,7 +49,6 @@ def enter_file_name_type():
 
 # Here an input fasta or genbank file will be converted to a string.
 def seq_to_string(input_sequence):
-    print("this is input_sequence" + str(type(input_sequence)))
     sequence = 0
     for keys, values in input_sequence.items():
         sequence = values.seq
