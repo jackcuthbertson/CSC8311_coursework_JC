@@ -132,18 +132,15 @@ def remove_restriction_sites(input_DNA):
     return nuc
 
 
-# With an input changed sequence string we create a new SeqRecord object which contains the new sequence, an ID, a name
-# and a description. The user will also input the name of their new fasta file.
-def create_seqrecord(sequence):
+# With an input sequence string we create a new SeqRecord object which contains the new sequence, an ID, a name
+# and a description. The user will also input the name of their new fasta file. The function is fed, sequence, id, name
+# description
+def create_seqrecord(sequence, id, name, description):
     seq = Seq(sequence)
     output_seq_record = SeqRecord(seq)
-    output_seq_record.id = input("Enter ID for new SeqRecord.\n")
-    name = input("What would you like to call your sequence\n"
-                 "enter 'NONE' for no name\n")
+    output_seq_record.id = id
     if name != "NONE":
         output_seq_record.name = name
-    description = input("Enter a short description for your sequence.\n"
-                        "Enter 'NONE' for no description\n")
     if description != "NONE":
         output_seq_record.description = description
     return output_seq_record
@@ -186,7 +183,12 @@ def main():
         sequence2 = "GAATTCGCGGCCGCTTCTAG" + sequence2 + "TACTAGTAGCGGCCGCTGCAG"
 
     # A SeqRecord object is created which contains our edited sequence, an ID, a name and a description.
-    seq_record = create_seqrecord(sequence2)
+    id = input("enter ID for new SeqRecord. \n")
+    name = input(("What would you like to call your sequence\n"
+                 "enter 'NONE' for no name\n"))
+    description = input("Enter a short description for your sequence.\n"
+                        "Enter 'NONE' for no description\n")
+    seq_record = create_seqrecord(sequence2, id, name, description)
 
     # the SeqRecord object is then written to a file with a filename chosen by the user.
     new_file_name = input("enter the name of your new fasta file here.\n")
