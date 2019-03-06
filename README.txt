@@ -24,6 +24,7 @@ If you wish to add a BioBrick compatible prefix and suffix it will add those to 
 You will be asked to enter the details of your new SeqRecord object (id, name, description).
 A prompt will come up to enter the filename for your new SeqRecord object.
 The SeqRecord will then be saved as a fasta file.
+For a detailed run through of the program check the image test_image.png found in the repository.
 
 Unittesting.
 
